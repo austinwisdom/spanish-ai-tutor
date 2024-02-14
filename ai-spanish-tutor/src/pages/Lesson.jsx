@@ -9,29 +9,25 @@ const Lesson = () => {
     const [response, setResponse] = useState("");
     const [userConversation, setUserConversation] = useState([]);
 
-    const submitHandler = async (e) => {
+    const submitHandler = (e) => {
         e.preventDefault();
+        console.log(message)
         if (!message.trim()) {
           alert("Please type a message.");
           return;
         }
-        e.currentTarget.disabled = true;
+        // e.currentTarget.disabled = true;
     
-        await axios
+        axios
             .post(`http://localhost:8080/my-tutor`, {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ message }),
-              })
+                message: message
+            })
             .then((data) => {
-              setResponse(data.message);
-              trackConversation(message, response);
-              e.currentTarget.disabled = false;
+                console.log(data)
+            //   e.currentTarget.disabled = false;
             })
             .catch((err) => {
-              console.log("Unable to send user response");
+              console.log(`Unable to send user response: ${err}`);
             });
         setMessage("");
       };
