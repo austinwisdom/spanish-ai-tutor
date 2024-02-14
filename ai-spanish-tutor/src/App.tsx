@@ -6,7 +6,7 @@ import {Home, Lesson, Conversation} from './pages'
 
 const App = () => {
     return (
-        <main className='bg-neutral-950'>
+        <main className='bg-white'>
             <Router>
                 <Navbar />
                 <Routes>

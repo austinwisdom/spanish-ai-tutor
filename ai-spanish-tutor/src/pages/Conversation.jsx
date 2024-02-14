@@ -2,7 +2,7 @@ import React from 'react';
 
 const Conversation = () => {
     return (
-        <section>
+        <section className='w-full h-screen relative'>
             <h1>CONVERSATION</h1>
         </section>
     );
