@@ -8,13 +8,24 @@ const Lesson = () => {
     const siteKey = import.meta.VITE_CAPTCHA_KEY
     const [message, setMessage] = useState("");
     const [response, setResponse] = useState("");
+    const [captcha, setCaptcha] = useState(true)
     const [userConversation, setUserConversation] = useState([]);
 
+    const clickHandler = (question) => {
+        setMessage(question)
+        submitHandler()
+    }
+
     const onChangeCaptcha = (value) => {
+        setCaptcha(true)
         console.log("Captcha value:", value)
     }
 
     const submitHandler = (e) => {
+        if (captcha === false) {
+            alert("Please complete the captcha to send your first message")
+            return
+        }
         e.preventDefault();
         console.log(message)
         if (!message.trim()) {
@@ -46,10 +57,10 @@ const Lesson = () => {
                 <div className='mb-4'>
                     <h2 className='text-red-600 text-xl mt-8 mb-4'>Example Questions <span className='text-sm'>(click to try)</span></h2>
                     <ul>
-                        <li><button className='mb-2 hover:cursor-pointer hover:text-red-600'>1. What are some fun slang phrases to use in Spanish?</button></li>
-                        <li><button className='mb-2 hover:cursor-pointer hover:text-red-600'>2. What is the difference between preterite and past imperfect?</button></li>
-                        <li><button className='mb-2 hover:cursor-pointer hover:text-red-600'>3. What are the 25 most important verbs to learn in Spanish?</button></li>
-                        <li><button className='mb-2 hover:cursor-pointer hover:text-red-600'>4. Why do we say me gusta and not yo gusto?</button></li>
+                        <li><button className='mb-2 hover:cursor-pointer hover:text-red-600' onClick={()=> clickHandler("What are some fun slang phrases to use in Spanish?")}>1. What are some fun slang phrases to use in Spanish?</button></li>
+                        <li><button className='mb-2 hover:cursor-pointer hover:text-red-600' onClick={()=> clickHandler("What is the difference between preterite and past imperfect?")}>2. What is the difference between preterite and past imperfect?</button></li>
+                        <li><button className='mb-2 hover:cursor-pointer hover:text-red-600' onClick={()=> clickHandler("What are the 25 most important verbs to learn in Spanish?")}>3. What are the 25 most important verbs to learn in Spanish?</button></li>
+                        <li><button className='mb-2 hover:cursor-pointer hover:text-red-600' onClick={()=> clickHandler("Why do we say me gusta and not yo gusto?")}>4. Why do we say me gusta and not yo gusto?</button></li>
                         
                     </ul>
                     </div>
