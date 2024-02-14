@@ -18,18 +18,13 @@ const Lesson = () => {
         e.currentTarget.disabled = true;
     
         await axios
-            // .post(`http://localhost:8080/my-tutor`, {
-            //     method: "POST",
-            //     headers: {
-            //       "Content-Type": "application/json",
-            //     },
-            //     body: JSON.stringify({ message }),
-            //   })
-        .get(`http://localhost:8080`)
-            .then((res) => {
-                console.log(res)
-                res.json()
-            })
+            .post(`http://localhost:8080/my-tutor`, {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ message }),
+              })
             .then((data) => {
               setResponse(data.message);
               trackConversation(message, response);
