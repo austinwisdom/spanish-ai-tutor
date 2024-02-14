@@ -8,7 +8,7 @@ const Lesson = () => {
     const siteKey = import.meta.VITE_CAPTCHA_KEY
     const [message, setMessage] = useState("");
     const [response, setResponse] = useState("");
-    const [captcha, setCaptcha] = useState(true)
+    const [captcha, setCaptcha] = useState(false)
     const [userConversation, setUserConversation] = useState([]);
 
     const clickHandler = (question) => {
