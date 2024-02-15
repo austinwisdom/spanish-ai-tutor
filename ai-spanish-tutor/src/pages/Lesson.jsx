@@ -10,6 +10,7 @@ const Lesson = () => {
     const [response, setResponse] = useState("");
     const [captcha, setCaptcha] = useState(false)
     const [userConversation, setUserConversation] = useState([]);
+    const [submitActive, setSubmitActive] = useState(true)
 
     const clickHandler = (question) => {
         setMessage(question)
@@ -27,25 +28,26 @@ const Lesson = () => {
             return
         }
         e.preventDefault();
+        setSubmitActive(false)
         console.log(message)
         if (!message.trim()) {
           alert("Please type a message.");
           return;
         }
-        // e.currentTarget.disabled = true;
-    
         axios
             .post(`http://localhost:8080/my-tutor`, {
                 message: message
             })
             .then((res) => {
                 setResponse(res?.data?.message)
+                setSubmitActive(true)
                 console.log(res.data)
-            //   e.currentTarget.disabled = false;
             })
             .catch((err) => {
-              console.log(`Unable to send user response: ${err}`);
+                setSubmitActive(true)
+                console.log(`Unable to send user response: ${err}`);
             });
+        
         setMessage("");
       };
     
@@ -55,7 +57,7 @@ const Lesson = () => {
             <div className='mx-24 mt-12 flex flex-row justify-evenly '>
                 <div className=''>
                 <div className='mb-4'>
-                    <h2 className='text-blue-600 text-xl mt-8 mb-4'>Example Questions <span className='text-sm'>(click to try)</span></h2>
+                    <h2 className='text-blue-600 text-xl mb-4'>Example Questions <span className='text-sm'>(click to try)</span></h2>
                     <ul>
                         <li><button className='mb-2 hover:cursor-pointer hover:text-blue-600' onClick={()=> clickHandler("What are some fun slang phrases to use in Spanish?")}>1. What are some fun slang phrases to use in Spanish?</button></li>
                         <li><button className='mb-2 hover:cursor-pointer hover:text-blue-600' onClick={()=> clickHandler("What is the difference between preterite and past imperfect?")}>2. What is the difference between preterite and past imperfect?</button></li>
@@ -74,7 +76,11 @@ const Lesson = () => {
                                 onChange={(e) => setMessage(e.target.value)}
                             >
                             </textarea>
-                            <button className='border-2 w-32 rounded-md text-white bg-blue-600 my-4 transition hover:bg-blue-700' type='submit'>Send</button>
+                            <button className='border-2 w-32 rounded-md text-white bg-blue-600 my-4 transition hover:bg-blue-700' 
+                            type='submit'
+                            disabled={!submitActive}>
+                                Send
+                            </button>
                             <ReCAPTCHA
                                 sitekey="6LeKRXMpAAAAABx-vhpyN_ChG4Uekswmd5DhuO8Y"
                                 size='compact'
