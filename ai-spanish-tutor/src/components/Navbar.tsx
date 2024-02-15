@@ -26,6 +26,11 @@ const Navbar = () => {
               
             </NavLink>
           </li>
+          <li className='list-none px-4 self-center'>
+            <NavLink to={"/game"} className={({ isActive }) => isActive ? 'text-yellow-300 cursor-pointer' :  'text-white hover:text-yellow-300 cursor-pointer'}>GAME
+              
+            </NavLink>
+          </li>
         </ul>
         
       </nav>
