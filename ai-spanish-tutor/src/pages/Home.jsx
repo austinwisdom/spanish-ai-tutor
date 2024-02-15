@@ -1,7 +1,6 @@
 import React from 'react';
-import { Canvas } from "@react-three/fiber";
 import {Link} from 'react-router-dom'
-import {sun, sunBlue, cat, eat, fox, hello, money, run, ski, spaceman, study, surf, text, typing} from '../assets/gifs/homepage/index'
+import {sunBlue, money, text, typing} from '../assets/gifs/homepage/index'
 
 const Home = () => {
     return (

@@ -1,4 +1,3 @@
-import hero from './hero.gif'
 import cat from './cat.gif'
 import eat from './eat.gif'
 import fox from './fox.gif'
@@ -15,5 +14,5 @@ import sun from './sun.gif'
 import sunBlue from './sunBlue.gif'
 
 export {
-    hero, cat, eat, fox, hello, money, run, ski, spaceman, study, surf, text, typing, sun, sunBlue
+    cat, eat, fox, hello, money, run, ski, spaceman, study, surf, text, typing, sun, sunBlue
 }
