@@ -14,7 +14,6 @@ const Lesson = () => {
 
     const clickHandler = (question) => {
         setMessage(question)
-        submitHandler()
     }
 
     const onChangeCaptcha = (value) => {
