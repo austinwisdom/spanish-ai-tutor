@@ -1,5 +1,7 @@
 //@ts-nocheck
 import React, { useState } from 'react';
+import clapping from "../assets/gifs/clapping.gif"
+import confetti from '../assets/gifs/confetti.gif'
 
 const Game = () => {
 
@@ -13,6 +15,10 @@ const Game = () => {
     const activeWordsHandler = (word) => {
         setActiveWords(activeWords.filter(w => w.id !== word.id));
         setWords([...words, {id: word.id, word: word.word}])
+    }
+
+    const goToNext = () => {
+        setIsCorrect(0)
     }
 
     //compare translation to active words
@@ -39,7 +45,7 @@ const Game = () => {
         {id:1, fk:0, word: "playa"}, {id:2, fk:0, word: "la"}, {id:3, fk:0, word: "a"}, {id:4, fk:0, word: "Voy"}])
     return (
         <section className='w-full h-screen relative flex flex-row justify-center'>
-            <div className='mt-12'>
+            <div className='mt-12 mr-32'>
                 <p className='text-blue-600'>Translate:</p>
                 <p className='text-lg'>{translation}</p>
 
@@ -68,15 +74,20 @@ const Game = () => {
                         ))}
                     </ul>
                 </div>
+                <div className='w-64 flex flex-row'>
                 <button className='border-2 w-32 rounded-md text-white bg-blue-600 my-4 transition hover:bg-blue-700'
                     onClick={()=> checkAnswer()}
                 >
                     Check
                 </button>
-                <p>{isCorrect}</p>
-            </div>
-            <div>
+                <button onClick={() => {goToNext()}} className='bg-neutral-200 w-16 m-4 h-6 self-center rounded-md'>
+                    Next
+                </button>
+                </div>
                 
+            </div>
+            <div className=''>
+                {isCorrect === 1 && (<img className='w-64 absolute' src={clapping} />)}
             </div>
         </section>
     );
