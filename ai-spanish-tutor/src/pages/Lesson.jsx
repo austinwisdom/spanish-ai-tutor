@@ -35,7 +35,7 @@ const Lesson = () => {
           return;
         }
         axios
-            .post(`http://localhost:8080/my-tutor`, {
+            .post(`https://ai-tutor-api.fly.dev/my-tutor`, {
                 message: message
             })
             .then((res) => {
