@@ -54,23 +54,23 @@ const Conversation = () => {
                 </div>
 
                 <div className='self-center w-1/2'>
-                        <div className='border-2 bg-neutral-50 rounded-md h-80 mb-2 overflow-scroll'>
+                        <div className='border-2 bg-neutral-50 rounded-md h-80 mb-2 overflow-scroll drop-shadow-sm'>
                             <ul className='p-2 flex flex-col'>
-                                <li className='self-start'><p className='border-2 rounded-md px-4 py-1 mx-4 bg-white'>¿Hola, qué tal?</p></li>
-                                <li className='self-end'><p className='border-2 border-blue-600 px-4 py-1 bg-blue-600 text-white rounded-md mx-4'>Bien, ¿y tú?</p></li>
-                                <li className='self-start'><p className='border-2 rounded-md px-4 py-1 mx-4 bg-white'>Bien, ¡gracias!</p></li>
+                                <li className='drop-shadow-sm self-start'><p className='border-2 rounded-md px-4 py-1 mx-4 bg-white'>¿Hola, qué tal?</p></li>
+                                <li className='drop-shadow-md self-end'><p className='border-2 border-blue-600 px-4 py-1 bg-blue-600 text-white rounded-md mx-4'>Bien, ¿y tú?</p></li>
+                                <li className='drop-shadow-sm self-start'><p className='border-2 rounded-md px-4 py-1 mx-4 bg-white'>Bien, ¡gracias!</p></li>
                             </ul>
                         </div>
                         <form className='flex flex-col' onSubmit={submitHandler}>
                             <textarea placeholder="Let's practice speaking!"
-                                className='w-full h-24 p-2 border-2 rounded-md'
+                                className='w-full h-24 p-2 border-2 rounded-md drop-shadow-sm'
                                 name="userInput"
                                 id="userInput"
                                 value={message}
                                 onChange={(e) => setMessage(e.target.value)}
                             >
                             </textarea>
-                            <button className='border-2 w-32 rounded-md text-white bg-blue-600 my-4 transition hover:bg-blue-700' type='submit'>Send</button>
+                            <button className='w-32 rounded-md text-white bg-blue-600 my-4 transition hover:bg-blue-700 drop-shadow-lg' type='submit'>Send</button>
                             <ReCAPTCHA
                                 sitekey="6LeKRXMpAAAAABx-vhpyN_ChG4Uekswmd5DhuO8Y"
                                 size='compact'

@@ -45,7 +45,7 @@ const Game = () => {
         {id:1, fk:0, word: "playa"}, {id:2, fk:0, word: "la"}, {id:3, fk:0, word: "a"}, {id:4, fk:0, word: "Voy"}])
     return (
         <section className='w-full h-screen relative flex flex-row justify-center'>
-            <div className='mt-12 mr-32'>
+            <div className='mt-12 mr-32 drop-shadow-md'>
                 <p className='text-blue-600'>Translate:</p>
                 <p className='text-lg'>{translation}</p>
 

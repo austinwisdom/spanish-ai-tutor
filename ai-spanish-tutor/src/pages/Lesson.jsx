@@ -69,14 +69,14 @@ const Lesson = () => {
                     <div className=''>
                         <form className='flex flex-col w-96' onSubmit={submitHandler}>
                             <textarea placeholder='Ask Maxi anything!'
-                                className='w-full h-32 p-2 border-2 rounded-md'
+                                className='w-full h-32 p-2 border-2 rounded-md drop-shadow-md'
                                 name="userInput"
                                 id="userInput"
                                 value={message}
                                 onChange={(e) => setMessage(e.target.value)}
                             >
                             </textarea>
-                            <button className='border-2 w-32 rounded-md text-white bg-blue-600 my-4 transition hover:bg-blue-700' 
+                            <button className='w-32 drop-shadow-lg rounded-md text-white bg-blue-600 my-4 transition hover:bg-blue-700' 
                             type='submit'
                             disabled={!submitActive}>
                                 Send
