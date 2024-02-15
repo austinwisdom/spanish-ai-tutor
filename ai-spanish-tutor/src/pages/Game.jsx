@@ -4,20 +4,12 @@ import React, { useState } from 'react';
 const Game = () => {
 
     const clickHandler = (word) => {
-        let wordsArr = words
-        let index = wordsArr.indexOf(word)
-        let removedWord = wordsArr.splice(index, 1)
-        console.log(wordsArr)
-        console.log(removedWord)
-        setWords(wordsArr)
-
-        let activeWordsArr = activeWords
-        activeWordsArr.push(removedWord)
-        setActiveWords(activeWordsArr)
+        
     }
 
     const [activeWords, setActiveWords] = useState([])
-    const [words, setWords] = useState(["Voy ", "playa ", "la ", "a "])
+    const [words, setWords] = useState([
+        {id:0, word: "Voy"}, {id:1, word: "playa"}, {id:2, word: "la"}, {id:3, word: "a"}])
 
     return (
         <section className='w-full h-screen relative'>
@@ -27,11 +19,19 @@ const Game = () => {
             </div>
             <div>
                 <h2>Words:</h2>
-                <div className='flex flex-row'>
-                        {words.map((word) => {
-                            return <button key={word} onClick={()=> clickHandler(word)} className='mx-1 px-2 border-2 rounded-md transition hover:bg-neutral-100'>{word}</button>;
-                        })}
-                </div>
+                
+                <ul className='flex flex-row'>
+                    {words.map(word => (
+                      <li key={word.id}>
+                        <button className='mx-1 px-2 border-2 rounded-md transition hover:bg-neutral-100' 
+                        onClick={() => {
+                          setWords(words.filter(w => w.id !== word.id));
+                        }}>
+                          {word.word}{' '}
+                        </button>
+                      </li>
+                    ))}
+                </ul>
             </div>
         </section>
     );
