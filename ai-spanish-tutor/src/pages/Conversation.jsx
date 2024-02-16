@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import ReCAPTCHA from "react-google-recaptcha";
 
@@ -6,15 +6,35 @@ const Conversation = () => {
     
     const endPoint = import.meta.env.VITE_ENDPOINT
     const siteKey = import.meta.VITE_CAPTCHA_KEY
+
     const [message, setMessage] = useState("");
     const [response, setResponse] = useState("");
-    const [captcha, setCaptcha] = useState(true)
+    const [captcha, setCaptcha] = useState(false)
     const [submitActive, setSubmitActive] = useState(true)
+    const [ userConversation, setUserConversation] = useState([])
+    console.log(userConversation)
+
+    const formatUserMessage = (userMessage) => {
+        return (<li className='drop-shadow-md self-end'><p className='border-2 border-blue-600 px-4 py-1 bg-blue-600 text-white rounded-md mx-4'>{userMessage}</p></li>)
+    }
+
+    const formatAIMessage = (AIMessage) => {
+        return <li className='drop-shadow-sm self-start'><p className='border-2 rounded-md px-4 py-1 mx-4 bg-white'>{AIMessage}</p></li>
+    }
 
     const onChangeCaptcha = (value) => {
         setCaptcha(true)
         console.log("Captcha value:", value)
     }
+
+    //create push message
+    const addMessage = (userMessage) => {
+        // ADD MESSAGE IS OVERRIDING THE ARRAY 
+        setUserConversation([...userConversation, userMessage])
+    }
+
+    //map is working
+    //need to push phrases to state var
 
     const submitHandler = (e) => {
         if (captcha === false) {
@@ -28,12 +48,18 @@ const Conversation = () => {
           alert("Please type a message.");
           return;
         }
+        setUserConversation([...userConversation, formatUserMessage(message)])
+        // addMessage(formatUserMessage(message))
         axios
             .post(`http://localhost:8080/my-tutor`, {
                 message: message
             })
             .then((res) => {
-                setResponse(res?.data?.message)
+                let AIRes = res?.data?.message
+                setResponse(AIRes)
+                let convoArr = []
+                setUserConversation([...userConversation, formatAIMessage(AIRes)])
+                // addMessage(formatAIMessage(AIRes))
                 setSubmitActive(true)
                 console.log(res.data)
             })
@@ -50,15 +76,19 @@ const Conversation = () => {
         <section className='w-full h-screen relative'>
             <div className='flex flex-col mt-12'>
                 <div className='self-center'>
-
+                    <p className='text-blue-600'>Please note: This page is still a work in progress</p>
                 </div>
-
                 <div className='self-center w-1/2'>
                         <div className='border-2 bg-neutral-50 rounded-md h-80 mb-2 overflow-scroll drop-shadow-sm'>
                             <ul className='p-2 flex flex-col'>
-                                <li className='drop-shadow-sm self-start'><p className='border-2 rounded-md px-4 py-1 mx-4 bg-white'>¿Hola, qué tal?</p></li>
+                                {/* <li className='drop-shadow-sm self-start'><p className='border-2 rounded-md px-4 py-1 mx-4 bg-white'>¿Hola, qué tal?</p></li>
                                 <li className='drop-shadow-md self-end'><p className='border-2 border-blue-600 px-4 py-1 bg-blue-600 text-white rounded-md mx-4'>Bien, ¿y tú?</p></li>
-                                <li className='drop-shadow-sm self-start'><p className='border-2 rounded-md px-4 py-1 mx-4 bg-white'>Bien, ¡gracias!</p></li>
+                                <li className='drop-shadow-sm self-start'><p className='border-2 rounded-md px-4 py-1 mx-4 bg-white'>Bien, ¡gracias!</p></li> */}
+                                {
+                                    userConversation.map((phrase) => {
+                                        return <>{phrase}</>
+                                    })
+                                }
                             </ul>
                         </div>
                         <form className='flex flex-col' onSubmit={submitHandler}>

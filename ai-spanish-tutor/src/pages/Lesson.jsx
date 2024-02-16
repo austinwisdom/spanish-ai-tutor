@@ -55,8 +55,9 @@ const Lesson = () => {
         <section className='w-full h-screen relative'>
             <div className='mx-24 mt-12 flex flex-row justify-evenly '>
                 <div className=''>
+                    <h1 className='text-2xl mb-4'>Language Coach</h1>
                 <div className='mb-4'>
-                    <h2 className='text-blue-600 text-xl mb-4'>Example Questions <span className='text-sm'>(click to try)</span></h2>
+                    <h2 className='text-blue-600 text-lg mb-4'>Example Questions <span className='text-sm'>(click to try)</span></h2>
                     <ul>
                         <li><button className='mb-2 hover:cursor-pointer hover:text-blue-600' onClick={()=> clickHandler("What are some fun slang phrases to use in Spanish?")}>1. What are some fun slang phrases to use in Spanish?</button></li>
                         <li><button className='mb-2 hover:cursor-pointer hover:text-blue-600' onClick={()=> clickHandler("What is the difference between preterite and past imperfect?")}>2. What is the difference between preterite and past imperfect?</button></li>

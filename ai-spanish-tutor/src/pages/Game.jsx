@@ -5,6 +5,15 @@ import confetti from '../assets/gifs/confetti.gif'
 
 const Game = () => {
 
+    const [isCorrect, setIsCorrect] = useState(0)
+    const [ answerKey, _setAnswerKey] = useState(4321)
+    const [translation, _setTranslation] = useState("I'm going to the beach.")
+    const [activeWords, setActiveWords] = useState([])
+    const [words, setWords] = useState([
+        // ! start id at 1 to avoid octal literal lint error!
+        {id:1, fk:0, word: "playa"}, {id:2, fk:0, word: "la"}, {id:3, fk:0, word: "a"}, {id:4, fk:0, word: "Voy"}])
+        
+
     //shows unguessed words
     const wordsClickHandler = (word) => {
         setWords(words.filter(w => w.id !== word.id));
@@ -36,13 +45,7 @@ const Game = () => {
         }
     }
 
-    const [isCorrect, setIsCorrect] = useState(0)
-    const [ answerKey, _setAnswerKey] = useState(4321)
-    const [translation, _setTranslation] = useState("I'm going to the beach.")
-    const [activeWords, setActiveWords] = useState([])
-    const [words, setWords] = useState([
-        // ! start id at 1 to avoid octal literal lint error!
-        {id:1, fk:0, word: "playa"}, {id:2, fk:0, word: "la"}, {id:3, fk:0, word: "a"}, {id:4, fk:0, word: "Voy"}])
+
     return (
         <section className='w-full h-screen relative flex flex-row justify-center'>
             <div className='mt-12 mr-32 drop-shadow-md'>
