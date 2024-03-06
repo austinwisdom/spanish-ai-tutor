@@ -8,8 +8,7 @@ const Conversation = () => {
     const siteKey = import.meta.VITE_CAPTCHA_KEY
 
     const [message, setMessage] = useState("");
-    const [response, setResponse] = useState("");
-    const [captcha, setCaptcha] = useState(true)
+    const [captcha, setCaptcha] = useState(false)
     const [_submitActive, setSubmitActive] = useState(true)
     const [ userConversation, setUserConversation] = useState([])
     console.log(userConversation)
@@ -33,14 +32,14 @@ const Conversation = () => {
         }
         e.preventDefault();
         setSubmitActive(false)
-        console.log(message)
+        
         if (!message.trim()) {
           alert("Please type a message.");
           return;
         }
 
         let convoArr = userConversation
-        convoArr.push(message)
+        convoArr.push(<li className='drop-shadow-md self-end'><p className='border-2 border-blue-600 px-4 py-1 bg-blue-600 text-white rounded-md mx-4'>{message}</p></li>)
         setUserConversation(convoArr)
 
         axios
@@ -50,7 +49,7 @@ const Conversation = () => {
             .then((res) => {
                 let AIRes = res?.data?.message
                 let convoArr = userConversation
-                convoArr.push(AIRes)
+                convoArr.push(<li className='drop-shadow-sm self-start'><p className='border-2 rounded-md px-4 py-1 mx-4 bg-white'>{AIRes}</p></li>)
                 setUserConversation(convoArr)       
                 setSubmitActive(true)
             })
@@ -72,7 +71,7 @@ const Conversation = () => {
                             <ul className='p-2 flex flex-col'>
                                 {
                                     userConversation.map((phrase) => {
-                                        return <li className='drop-shadow-sm self-start'><p className='border-2 rounded-md px-4 py-1 mx-4 bg-white'>{phrase}</p></li>
+                                        return <>{phrase}</>
                                     })
                                 }
                             </ul>
