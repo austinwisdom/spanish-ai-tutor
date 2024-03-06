@@ -9,8 +9,8 @@ const Conversation = () => {
 
     const [message, setMessage] = useState("");
     const [response, setResponse] = useState("");
-    const [captcha, setCaptcha] = useState(false)
-    const [submitActive, setSubmitActive] = useState(true)
+    const [captcha, setCaptcha] = useState(true)
+    const [_submitActive, setSubmitActive] = useState(true)
     const [ userConversation, setUserConversation] = useState([])
     console.log(userConversation)
 
@@ -38,7 +38,10 @@ const Conversation = () => {
           alert("Please type a message.");
           return;
         }
-        setUserConversation([...userConversation, formatUserMessage(message)])
+
+        let convoArr = userConversation
+        convoArr.push(message)
+        setUserConversation(convoArr)
 
         axios
             .post(`https://ai-tutor-api.fly.dev/my-tutor`, {
@@ -46,11 +49,10 @@ const Conversation = () => {
             })
             .then((res) => {
                 let AIRes = res?.data?.message
-                setResponse(AIRes)
-                let convoArr = []
-                setUserConversation([...userConversation, formatAIMessage(AIRes)])       
+                let convoArr = userConversation
+                convoArr.push(AIRes)
+                setUserConversation(convoArr)       
                 setSubmitActive(true)
-                console.log(res.data)
             })
             .catch((err) => {
                 setSubmitActive(true)
@@ -70,7 +72,7 @@ const Conversation = () => {
                             <ul className='p-2 flex flex-col'>
                                 {
                                     userConversation.map((phrase) => {
-                                        return <>{phrase}</>
+                                        return <li className='drop-shadow-sm self-start'><p className='border-2 rounded-md px-4 py-1 mx-4 bg-white'>{phrase}</p></li>
                                     })
                                 }
                             </ul>
