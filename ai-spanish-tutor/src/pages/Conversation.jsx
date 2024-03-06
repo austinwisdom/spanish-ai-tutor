@@ -24,18 +24,7 @@ const Conversation = () => {
 
     const onChangeCaptcha = (value) => {
         setCaptcha(true)
-        console.log("Captcha value:", value)
     }
-
-    //create push message
-    const addMessage = (userMessage, type) => {
-        // ADD MESSAGE IS OVERRIDING THE ARRAY 
-        //don't inject jsx element, just inject
-        setUserConversation([...userConversation, {userMessage, type}])
-    }
-
-    //map is working
-    //need to push phrases to state var
 
     const submitHandler = (e) => {
         if (captcha === false) {
@@ -51,7 +40,6 @@ const Conversation = () => {
         }
         setUserConversation([...userConversation, formatUserMessage(message)])
 
-        // addMessage(formatUserMessage(message))
         axios
             .post(`https://ai-tutor-api.fly.dev/my-tutor`, {
                 message: message
@@ -60,7 +48,7 @@ const Conversation = () => {
                 let AIRes = res?.data?.message
                 setResponse(AIRes)
                 let convoArr = []
-                setUserConversation([...userConversation, formatAIMessage(AIRes)])                // addMessage(formatAIMessage(AIRes))
+                setUserConversation([...userConversation, formatAIMessage(AIRes)])       
                 setSubmitActive(true)
                 console.log(res.data)
             })
@@ -80,9 +68,6 @@ const Conversation = () => {
                 <div className='self-center w-1/2'>
                         <div className='border-2 bg-neutral-50 rounded-md h-80 mb-2 overflow-scroll drop-shadow-sm'>
                             <ul className='p-2 flex flex-col'>
-                                {/* <li className='drop-shadow-sm self-start'><p className='border-2 rounded-md px-4 py-1 mx-4 bg-white'>¿Hola, qué tal?</p></li>
-                                <li className='drop-shadow-md self-end'><p className='border-2 border-blue-600 px-4 py-1 bg-blue-600 text-white rounded-md mx-4'>Bien, ¿y tú?</p></li>
-                                <li className='drop-shadow-sm self-start'><p className='border-2 rounded-md px-4 py-1 mx-4 bg-white'>Bien, ¡gracias!</p></li> */}
                                 {
                                     userConversation.map((phrase) => {
                                         return <>{phrase}</>
