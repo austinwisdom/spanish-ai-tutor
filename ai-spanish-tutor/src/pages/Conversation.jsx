@@ -28,9 +28,10 @@ const Conversation = () => {
     }
 
     //create push message
-    const addMessage = (userMessage) => {
+    const addMessage = (userMessage, type) => {
         // ADD MESSAGE IS OVERRIDING THE ARRAY 
-        setUserConversation([...userConversation, userMessage])
+        //don't inject jsx element, just inject
+        setUserConversation([...userConversation, {userMessage, type}])
     }
 
     //map is working
@@ -48,17 +49,17 @@ const Conversation = () => {
           alert("Please type a message.");
           return;
         }
-        setUserConversation([...userConversation, formatUserMessage(message)])
+        setUserConversation([...userConversation, {message: AIRes, type: "user"}])
         // addMessage(formatUserMessage(message))
         axios
-            .post(`http://localhost:8080/my-tutor`, {
+            .post(`https://ai-tutor-api.fly.dev/my-tutor`, {
                 message: message
             })
             .then((res) => {
                 let AIRes = res?.data?.message
                 setResponse(AIRes)
                 let convoArr = []
-                setUserConversation([...userConversation, formatAIMessage(AIRes)])
+                setUserConversation([...userConversation, {message: AIRes, type: "ai"}])
                 // addMessage(formatAIMessage(AIRes))
                 setSubmitActive(true)
                 console.log(res.data)
@@ -75,9 +76,7 @@ const Conversation = () => {
     return (
         <section className='w-full h-screen relative'>
             <div className='flex flex-col mt-12'>
-                <div className='self-center'>
-                    <p className='text-blue-600'>Please note: This page is still a work in progress</p>
-                </div>
+                
                 <div className='self-center w-1/2'>
                         <div className='border-2 bg-neutral-50 rounded-md h-80 mb-2 overflow-scroll drop-shadow-sm'>
                             <ul className='p-2 flex flex-col'>
