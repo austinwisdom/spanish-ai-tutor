@@ -11,15 +11,6 @@ const Conversation = () => {
     const [captcha, setCaptcha] = useState(false)
     const [_submitActive, setSubmitActive] = useState(true)
     const [ userConversation, setUserConversation] = useState([])
-    console.log(userConversation)
-
-    const formatUserMessage = (userMessage) => {
-        return (<li className='drop-shadow-md self-end'><p className='border-2 border-blue-600 px-4 py-1 bg-blue-600 text-white rounded-md mx-4'>{userMessage}</p></li>)
-    }
-
-    const formatAIMessage = (AIMessage) => {
-        return <li className='drop-shadow-sm self-start'><p className='border-2 rounded-md px-4 py-1 mx-4 bg-white'>{AIMessage}</p></li>
-    }
 
     const onChangeCaptcha = (value) => {
         setCaptcha(true)
@@ -39,7 +30,7 @@ const Conversation = () => {
         }
 
         let convoArr = userConversation
-        convoArr.push(<li className='drop-shadow-md self-end'><p className='border-2 border-blue-600 px-4 py-1 bg-blue-600 text-white rounded-md mx-4'>{message}</p></li>)
+        convoArr.push(<li className='drop-shadow-md self-end my-4'><p className='border-2 border-blue-600 px-4 py-1 bg-blue-600 text-white rounded-md mx-4'>{message}</p></li>)
         setUserConversation(convoArr)
 
         axios
