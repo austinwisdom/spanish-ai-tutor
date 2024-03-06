@@ -49,7 +49,8 @@ const Conversation = () => {
           alert("Please type a message.");
           return;
         }
-        setUserConversation([...userConversation, {message: AIRes, type: "user"}])
+        setUserConversation([...userConversation, formatUserMessage(message)])
+
         // addMessage(formatUserMessage(message))
         axios
             .post(`https://ai-tutor-api.fly.dev/my-tutor`, {
@@ -59,8 +60,7 @@ const Conversation = () => {
                 let AIRes = res?.data?.message
                 setResponse(AIRes)
                 let convoArr = []
-                setUserConversation([...userConversation, {message: AIRes, type: "ai"}])
-                // addMessage(formatAIMessage(AIRes))
+                setUserConversation([...userConversation, formatAIMessage(AIRes)])                // addMessage(formatAIMessage(AIRes))
                 setSubmitActive(true)
                 console.log(res.data)
             })
