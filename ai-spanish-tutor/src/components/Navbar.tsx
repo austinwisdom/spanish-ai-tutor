@@ -1,18 +1,32 @@
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 
-import { Fragment } from 'react'
-import { Menu, Transition } from '@headlessui/react'
-import { ChevronDownIcon } from '@heroicons/react/20/solid'
+import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react'
+import {
+  ArchiveBoxXMarkIcon,
+  ChevronDownIcon,
+  PencilIcon,
+  Square2StackIcon,
+  TrashIcon,
+} from '@heroicons/react/16/solid'
 
 
 import logo from '../assets/logos/logo2Yellow.svg'
 import flag_de from '../assets/logos/flags/flag_de.svg'
 import flag_fr from '../assets/logos/flags/flag_fr.svg'
-import flag_en from '../assets/logos/flags/flag_en.svg'
+import flag_us from '../assets/logos/flags/flag_en.svg'
 import flag_jp from '../assets/logos/flags/flag_jp.svg'
 import flag_es from '../assets/logos/flags/flag_es.svg'
-import flag_br from '../assets/logos/flags/flag_br.svg'
+import flag_br from '../assets/logos/flags/flag_pt.svg'
+
+const languages = [
+  {href: '/es', label: 'Español', icon: flag_es},
+  {href: '/en', label: 'English', icon: flag_us},
+  {href: '/de', label: 'Deutsche', icon: flag_de},
+  {href: '/pt', label: 'Português', icon: flag_br},
+  {href: '/fr', label: 'Français', icon: flag_fr},
+  {href: '/jp', label: '日本語', icon: flag_jp}
+]
 
 const Navbar = () => {
 
@@ -48,35 +62,85 @@ const Navbar = () => {
             </NavLink>
           </li>
           <li className='list-none px-4 self-center drop-shadow-lg text-white font-semibold'>
-              <div className="flex w-36">
-                <div className="content-center cursor-pointer hover:text-yellow-300">LEARNING: </div>
-                <img className="w-10 m-1 content-center cursor-pointer hover:w-12" src={flag_es} />
-              </div>
+              
           </li>
           <li>
-          <div className="relative inline-block text-left">
-  <div>
-    <button type="button" className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" id="menu-button" aria-expanded="true" aria-haspopup="true">
-      Options
-      <svg className="-mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-        <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
-      </svg>
-    </button>
-  </div>
-  
-  <div className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabIndex={-1}>
-    <div className="py-1" role="none">
-      <a href="#" className="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabIndex={-1} id="menu-item-0">Account settings</a>
-      <a href="#" className="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabIndex={-1} id="menu-item-1">Support</a>
-      <a href="#" className="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabIndex={-1} id="menu-item-2">License</a>
-      <form method="POST" action="#" role="none">
-        <button type="submit" className="text-gray-700 block w-full px-4 py-2 text-left text-sm" role="menuitem" tabIndex={-1} id="menu-item-3">Sign out</button>
-      </form>
-    </div>
-  </div>
-</div>
-          </li>
-        </ul>
+            <div className="content-center w-52">
+            <Menu>
+              <MenuButton className="items-center rounded-md font-semibold text-white  shadow-white/10 focus:outline-none">
+                <div className="flex w-36">
+                  <p className="content-center cursor-pointer hover:text-yellow-300">LEARNING: </p>
+                  <img className="w-10 ml-1 content-center cursor-pointer" src={flag_es} />
+                  {/* <ChevronDownIcon className="size-4 fill-white" /> */}
+                </div>
+              </MenuButton>
+              <Transition
+                enter="transition ease-out duration-75"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="transition ease-in duration-100"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
+              >
+                <MenuItems
+                  anchor="bottom end"
+                  className="w-52 origin-top-right rounded-xl border border-yellow bg-blue-600 p-1 text-sm/6 text-white [--anchor-gap:var(--spacing-1)] focus:outline-none"
+                >
+                  <MenuItem>
+                    <button className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-white/10">
+                      {/* <PencilIcon className="size-4 " /> */}
+                      Español
+                      {/* <kbd className="ml-auto font-sans text-xs text-white group-data-[focus]:inline">⌘E</kbd> */}
+                      <img className="w-10 ml-auto content-center cursor-pointer" src={flag_es} />
+                    </button>
+                  </MenuItem>
+                  <div className="my-1 h-px bg-white/5" />
+                  <MenuItem>
+                    <button className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-white/10">
+                      {/* <PencilIcon className="size-4 " /> */}
+                      Deutsche
+                      {/* <kbd className="ml-auto font-sans text-xs text-white group-data-[focus]:inline">⌘E</kbd> */}
+                      <img className="w-10 ml-auto content-center cursor-pointer" src={flag_de} />
+                    </button>
+                  </MenuItem>
+                  <MenuItem>
+                    <button className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-white/10">
+                      {/* <PencilIcon className="size-4 " /> */}
+                      Português
+                      {/* <kbd className="ml-auto font-sans text-xs text-white group-data-[focus]:inline">⌘E</kbd> */}
+                      <img className="w-10 ml-auto content-center cursor-pointer" src={flag_br} />
+                    </button>
+                  </MenuItem>
+                  <MenuItem>
+                    <button className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-white/10">
+                      {/* <PencilIcon className="size-4 " /> */}
+                      English
+                      {/* <kbd className="ml-auto font-sans text-xs text-white group-data-[focus]:inline">⌘E</kbd> */}
+                      <img className="w-10 ml-auto content-center cursor-pointer" src={flag_us} />
+                    </button>
+                  </MenuItem>
+                  <MenuItem>
+                    <button className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-white/10">
+                      {/* <PencilIcon className="size-4 " /> */}
+                      Français
+                      {/* <kbd className="ml-auto font-sans text-xs text-white group-data-[focus]:inline">⌘E</kbd> */}
+                      <img className="w-10 ml-auto content-center cursor-pointer" src={flag_fr} />
+                    </button>
+                  </MenuItem>
+                  <MenuItem>
+                    <button className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-white/10">
+                      {/* <PencilIcon className="size-4 " /> */}
+                      日本語
+                      {/* <kbd className="ml-auto font-sans text-xs text-white group-data-[focus]:inline">⌘E</kbd> */}
+                      <img className="w-10 ml-auto content-center cursor-pointer" src={flag_jp} />
+                    </button>
+                  </MenuItem>
+                </MenuItems>
+              </Transition>
+            </Menu>
+        </div>
+      </li>
+    </ul>
         
       </nav>
     );
