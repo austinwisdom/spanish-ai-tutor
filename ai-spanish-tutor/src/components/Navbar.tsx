@@ -24,7 +24,7 @@ const languages = [
 
 const Navbar = () => {
 
-  const [activeLanguage, setActiveLanguage] = useState(flag_us)
+  const [activeLanguage, setActiveLanguage] = useState(flag_es)
 
     return (
         <nav className='justify-center sm:justify-center flex flex-row bg-blue-600'>
@@ -55,12 +55,13 @@ const Navbar = () => {
               
             </NavLink>
           </li>
-          <li className='list-none px-4 self-center drop-shadow-lg'>
-            <div className="content-center w-52">
+    </ul>
+    <div className='list-none px-4 self-center drop-shadow-lg text-right'>
+            <div className="content-end w-52">
             <Menu>
               <MenuButton className="items-center rounded-md font-semibold text-white  shadow-white/10 focus:outline-none">
                 <div className="flex w-36">
-                  <p className="content-center cursor-pointer hover:text-yellow-300">LEARNING </p>
+                  <p className="content-center cursor-pointer hover:text-yellow-300"> </p>
                   <img className="w-10 ml-1 content-center cursor-pointer" src={activeLanguage} />
                   {/* <ChevronDownIcon className="size-4 fill-white" /> */}
                 </div>
@@ -93,8 +94,7 @@ const Navbar = () => {
               </Transition>
             </Menu>
         </div>
-      </li>
-    </ul>
+      </div>
         
       </nav>
     );
