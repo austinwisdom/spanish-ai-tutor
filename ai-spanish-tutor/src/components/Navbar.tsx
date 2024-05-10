@@ -2,13 +2,7 @@ import { NavLink } from "react-router-dom";
 import { useState } from "react";
 
 import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react'
-import {
-  ArchiveBoxXMarkIcon,
-  ChevronDownIcon,
-  PencilIcon,
-  Square2StackIcon,
-  TrashIcon,
-} from '@heroicons/react/16/solid'
+// import {ChevronDownIcon} from '@heroicons/react/16/solid'
 
 
 import logo from '../assets/logos/logo2Yellow.svg'
@@ -30,7 +24,7 @@ const languages = [
 
 const Navbar = () => {
 
-  const [activeLanguage, setActiveLanguage] = useState("en")
+  const [activeLanguage, setActiveLanguage] = useState(flag_us)
 
     return (
         <nav className='justify-center sm:justify-center flex flex-row bg-blue-600'>
@@ -61,16 +55,13 @@ const Navbar = () => {
               
             </NavLink>
           </li>
-          <li className='list-none px-4 self-center drop-shadow-lg text-white font-semibold'>
-              
-          </li>
-          <li>
+          <li className='list-none px-4 self-center drop-shadow-lg'>
             <div className="content-center w-52">
             <Menu>
               <MenuButton className="items-center rounded-md font-semibold text-white  shadow-white/10 focus:outline-none">
                 <div className="flex w-36">
-                  <p className="content-center cursor-pointer hover:text-yellow-300">LEARNING: </p>
-                  <img className="w-10 ml-1 content-center cursor-pointer" src={flag_es} />
+                  <p className="content-center cursor-pointer hover:text-yellow-300">LEARNING </p>
+                  <img className="w-10 ml-1 content-center cursor-pointer" src={activeLanguage} />
                   {/* <ChevronDownIcon className="size-4 fill-white" /> */}
                 </div>
               </MenuButton>
@@ -86,55 +77,18 @@ const Navbar = () => {
                   anchor="bottom end"
                   className="w-52 origin-top-right rounded-xl border border-yellow bg-blue-600 p-1 text-sm/6 text-white [--anchor-gap:var(--spacing-1)] focus:outline-none"
                 >
-                  <MenuItem>
-                    <button className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-white/10">
-                      {/* <PencilIcon className="size-4 " /> */}
-                      Español
-                      {/* <kbd className="ml-auto font-sans text-xs text-white group-data-[focus]:inline">⌘E</kbd> */}
-                      <img className="w-10 ml-auto content-center cursor-pointer" src={flag_es} />
-                    </button>
-                  </MenuItem>
-                  <div className="my-1 h-px bg-white/5" />
-                  <MenuItem>
-                    <button className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-white/10">
-                      {/* <PencilIcon className="size-4 " /> */}
-                      Deutsche
-                      {/* <kbd className="ml-auto font-sans text-xs text-white group-data-[focus]:inline">⌘E</kbd> */}
-                      <img className="w-10 ml-auto content-center cursor-pointer" src={flag_de} />
-                    </button>
-                  </MenuItem>
-                  <MenuItem>
-                    <button className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-white/10">
-                      {/* <PencilIcon className="size-4 " /> */}
-                      Português
-                      {/* <kbd className="ml-auto font-sans text-xs text-white group-data-[focus]:inline">⌘E</kbd> */}
-                      <img className="w-10 ml-auto content-center cursor-pointer" src={flag_br} />
-                    </button>
-                  </MenuItem>
-                  <MenuItem>
-                    <button className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-white/10">
-                      {/* <PencilIcon className="size-4 " /> */}
-                      English
-                      {/* <kbd className="ml-auto font-sans text-xs text-white group-data-[focus]:inline">⌘E</kbd> */}
-                      <img className="w-10 ml-auto content-center cursor-pointer" src={flag_us} />
-                    </button>
-                  </MenuItem>
-                  <MenuItem>
-                    <button className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-white/10">
-                      {/* <PencilIcon className="size-4 " /> */}
-                      Français
-                      {/* <kbd className="ml-auto font-sans text-xs text-white group-data-[focus]:inline">⌘E</kbd> */}
-                      <img className="w-10 ml-auto content-center cursor-pointer" src={flag_fr} />
-                    </button>
-                  </MenuItem>
-                  <MenuItem>
-                    <button className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-white/10">
-                      {/* <PencilIcon className="size-4 " /> */}
-                      日本語
-                      {/* <kbd className="ml-auto font-sans text-xs text-white group-data-[focus]:inline">⌘E</kbd> */}
-                      <img className="w-10 ml-auto content-center cursor-pointer" src={flag_jp} />
-                    </button>
-                  </MenuItem>
+                  {languages.map((language) => (
+                    <>
+                      <MenuItem>
+                        <button onClick={()=> setActiveLanguage(language.icon)}  className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-white/10">
+                          {language.label}
+                          <img className="w-10 ml-auto content-center cursor-pointer" src={language.icon} />
+                        </button>
+                      </MenuItem>
+                  <div className="my-1 h-px bg-white/5" /></>
+                  ))}
+                  
+                  
                 </MenuItems>
               </Transition>
             </Menu>
