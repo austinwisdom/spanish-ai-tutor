@@ -2,6 +2,9 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import ReCAPTCHA from "react-google-recaptcha";
 
+// deployed api url https://ai-tutor-api.fly.dev/my-tutor
+// test url http://localhost:3000/my-tutor
+
 const Lesson = () => {
 
     const endPoint = import.meta.env.VITE_ENDPOINT
@@ -11,6 +14,9 @@ const Lesson = () => {
     const [captcha, setCaptcha] = useState(false)
     const [userConversation, setUserConversation] = useState([]);
     const [submitActive, setSubmitActive] = useState(true)
+    const [language, _setLanguage] = useState("german")
+
+    const myTutorURL = "https://ai-tutor-api.fly.dev/my-tutor"
 
     const clickHandler = (question) => {
         setMessage(question)
@@ -34,7 +40,7 @@ const Lesson = () => {
           return;
         }
         axios
-            .post(`https://ai-tutor-api.fly.dev/my-tutor`, {
+            .post(`${myTutorURL}/${language}`, {
                 message: message
             })
             .then((res) => {
