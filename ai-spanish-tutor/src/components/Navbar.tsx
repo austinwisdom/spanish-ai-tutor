@@ -31,7 +31,7 @@ const Navbar = () => {
         <div className="ml-24">
             <NavLink to={'/'}><img className="h-32 drop-shadow-lg" src={logo}/></NavLink>
         </div>
-        <ul className='mx-20 mt-10 h-12  flex flex-row justify-center rounded-2xl border-2'>
+        <ul className='mx-20 mt-10 h-12 px-4 flex flex-row justify-center rounded-2xl border-2'>
         
           <li className='list-none px-4 self-center drop-shadow-lg'>
             <NavLink to={"/"}  className={({ isActive }) => isActive ? 'text-yellow-300 cursor-pointer font-semibold' :  'text-white hover:text-yellow-300 cursor-pointer font-semibold'}><button>
@@ -62,7 +62,7 @@ const Navbar = () => {
               <MenuButton className="items-center rounded-md font-semibold text-white  shadow-white/10 focus:outline-none">
                 <div className="flex w-36">
                   <p className="content-center cursor-pointer hover:text-yellow-300"> </p>
-                  <img className="w-10 ml-1 content-center cursor-pointer" src={activeLanguage} />
+                  <img className="w-10 ml-1 content-center cursor-pointer hover:w-12" src={activeLanguage} />
                   {/* <ChevronDownIcon className="size-4 fill-white" /> */}
                 </div>
               </MenuButton>
