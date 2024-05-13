@@ -14,17 +14,18 @@ import flag_es from '../assets/logos/flags/flag_es.svg'
 import flag_br from '../assets/logos/flags/flag_pt.svg'
 
 const languages = [
-  {href: '/es', label: 'Español', icon: flag_es},
-  {href: '/en', label: 'English', icon: flag_us},
-  {href: '/de', label: 'Deutsche', icon: flag_de},
-  {href: '/pt', label: 'Português', icon: flag_br},
-  {href: '/fr', label: 'Français', icon: flag_fr},
-  {href: '/jp', label: '日本語', icon: flag_jp}
+  {code: 'es', href: '/es', label: 'Español', icon: flag_es},
+  {code: 'en',href: '/en', label: 'English', icon: flag_us},
+  {code: 'de',href: '/de', label: 'Deutsche', icon: flag_de},
+  {code: 'pt',href: '/pt', label: 'Português', icon: flag_br},
+  {code: 'fr',href: '/fr', label: 'Français', icon: flag_fr},
+  {code: 'jp',href: '/jp', label: '日本語', icon: flag_jp}
 ]
 
-const Navbar = () => {
+const Navbar = (langStudy:string) => {
 
   const [activeLanguage, setActiveLanguage] = useState(flag_es)
+  console.log(langStudy)
 
     return (
         <nav className='justify-center sm:justify-center flex flex-row bg-blue-600'>
@@ -61,7 +62,7 @@ const Navbar = () => {
             <Menu>
               <MenuButton className="items-center rounded-md font-semibold text-white  shadow-white/10 focus:outline-none">
                 <div className="flex w-36">
-                  <p className="content-center cursor-pointer hover:text-yellow-300"> </p>
+                  <p className="content-center cursor-pointer hover:text-yellow-300"> Learning: </p>
                   <img className="w-10 ml-1 content-center cursor-pointer hover:w-12" src={activeLanguage} />
                   {/* <ChevronDownIcon className="size-4 fill-white" /> */}
                 </div>

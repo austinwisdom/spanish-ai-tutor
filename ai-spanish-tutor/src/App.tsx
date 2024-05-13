@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import Navbar from './components/Navbar';
 
@@ -5,10 +6,15 @@ import Navbar from './components/Navbar';
 import {Home, Lesson, Conversation, Game } from './pages'
 
 const App = () => {
+
+    // the language the user is STUDYING
+    const [langStudy, setLangStudy] = useState("es")
+
     return (
         <main className='bg-white'>
             <Router>
-                <Navbar />
+                {/* @ts-ignore */}
+                <Navbar langStudy={langStudy} />
                 <Routes>
                     <Route path='/' element={<Home />} />
                     <Route path='/lessons' element={<Lesson />} />
