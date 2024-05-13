@@ -1,6 +1,6 @@
+//@ts-nocheck
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
 import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react'
 // import {ChevronDownIcon} from '@heroicons/react/16/solid'
 
@@ -13,22 +13,27 @@ import flag_jp from '../assets/logos/flags/flag_jp.svg'
 import flag_es from '../assets/logos/flags/flag_es.svg'
 import flag_br from '../assets/logos/flags/flag_pt.svg'
 
-const languages = [
-  {code: 'es', href: '/es', label: 'Español', icon: flag_es},
-  {code: 'en',href: '/en', label: 'English', icon: flag_us},
-  {code: 'de',href: '/de', label: 'Deutsche', icon: flag_de},
-  {code: 'pt',href: '/pt', label: 'Português', icon: flag_br},
-  {code: 'fr',href: '/fr', label: 'Français', icon: flag_fr},
-  {code: 'jp',href: '/jp', label: '日本語', icon: flag_jp}
+const languages2 = [
+  {id: 'es', href: '/es', label: 'Español', icon: flag_es},
+  {id: 'en',href: '/en', label: 'English', icon: flag_us},
+  {id: 'de',href: '/de', label: 'Deutsche', icon: flag_de},
+  {id: 'pt',href: '/pt', label: 'Português', icon: flag_br},
+  {id: 'fr',href: '/fr', label: 'Français', icon: flag_fr},
+  {id: 'jp',href: '/jp', label: '日本語', icon: flag_jp}
 ]
 
-const Navbar = (langStudy:string) => {
+const Navbar = ({languages, langStudy, setLangStudy}, ...props:any) => {
 
-  const [activeLanguage, setActiveLanguage] = useState(flag_es)
-  console.log(langStudy)
+  const [icon, setIcon] = useState(langStudy.icon)
+
+  //click handler to call setlangstudy hook from app.tsx
+  const clickHandler = (id) => {
+    const newLang = languages.find((element) => element.id === id)
+    setLangStudy(newLang)
+  }
 
     return (
-        <nav className='justify-center sm:justify-center flex flex-row bg-blue-600'>
+        langStudy && (<nav className='justify-center sm:justify-center flex flex-row bg-blue-600'>
         <div className="ml-24">
             <NavLink to={'/'}><img className="h-32 drop-shadow-lg" src={logo}/></NavLink>
         </div>
@@ -63,7 +68,7 @@ const Navbar = (langStudy:string) => {
               <MenuButton className="items-center rounded-md font-semibold text-white  shadow-white/10 focus:outline-none">
                 <div className="flex w-36">
                   <p className="content-center cursor-pointer hover:text-yellow-300"> Learning: </p>
-                  <img className="w-10 ml-1 content-center cursor-pointer hover:w-12" src={activeLanguage} />
+                  <img className="w-10 ml-1 content-center cursor-pointer hover:w-12" src={langStudy.icon} />
                   {/* <ChevronDownIcon className="size-4 fill-white" /> */}
                 </div>
               </MenuButton>
@@ -79,10 +84,10 @@ const Navbar = (langStudy:string) => {
                   anchor="bottom end"
                   className="w-52 origin-top-right rounded-xl border border-yellow bg-blue-600 p-1 text-sm/6 text-white [--anchor-gap:var(--spacing-1)] focus:outline-none"
                 >
-                  {languages.map((language) => (
+                  {languages2.map((language) => (
                     <>
                       <MenuItem>
-                        <button onClick={()=> setActiveLanguage(language.icon)}  className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-white/10">
+                        <button onClick={(event)=> clickHandler(language.id)}  className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-white/10">
                           {language.label}
                           <img className="w-10 ml-auto content-center cursor-pointer" src={language.icon} />
                         </button>
@@ -97,7 +102,7 @@ const Navbar = (langStudy:string) => {
         </div>
       </div>
         
-      </nav>
+      </nav>)
     );
 };
 
