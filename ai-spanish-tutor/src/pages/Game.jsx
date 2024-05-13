@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import clapping from "../assets/gifs/clapping.gif"
 import confetti from '../assets/gifs/confetti.gif'
 
-const Game = () => {
+const Game = ({languages, langStudy}, ...props) => {
 
     const [isCorrect, setIsCorrect] = useState(0)
     const [ answerKey, _setAnswerKey] = useState(4321)

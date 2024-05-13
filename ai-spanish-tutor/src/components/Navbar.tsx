@@ -3,24 +3,15 @@ import { NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react'
 // import {ChevronDownIcon} from '@heroicons/react/16/solid'
-
-
 import logo from '../assets/logos/logo2Yellow.svg'
-import flag_de from '../assets/logos/flags/flag_de.svg'
-import flag_fr from '../assets/logos/flags/flag_fr.svg'
-import flag_us from '../assets/logos/flags/flag_en.svg'
-import flag_jp from '../assets/logos/flags/flag_jp.svg'
-import flag_es from '../assets/logos/flags/flag_es.svg'
-import flag_br from '../assets/logos/flags/flag_pt.svg'
 
-const languages2 = [
-  {id: 'es', href: '/es', label: 'Español', icon: flag_es},
-  {id: 'en',href: '/en', label: 'English', icon: flag_us},
-  {id: 'de',href: '/de', label: 'Deutsche', icon: flag_de},
-  {id: 'pt',href: '/pt', label: 'Português', icon: flag_br},
-  {id: 'fr',href: '/fr', label: 'Français', icon: flag_fr},
-  {id: 'jp',href: '/jp', label: '日本語', icon: flag_jp}
-]
+// to-do list:
+// 1. change AI tutor to match study lang
+// 2. setup vocab database in rails and deploy
+//  - verbs with conjugations model
+//  - helpful phrases model
+//    - category of phrase
+// 3. add user Profile, settings
 
 const Navbar = ({languages, langStudy, setLangStudy}, ...props:any) => {
 
@@ -84,7 +75,7 @@ const Navbar = ({languages, langStudy, setLangStudy}, ...props:any) => {
                   anchor="bottom end"
                   className="w-52 origin-top-right rounded-xl border border-yellow bg-blue-600 p-1 text-sm/6 text-white [--anchor-gap:var(--spacing-1)] focus:outline-none"
                 >
-                  {languages2.map((language) => (
+                  {languages.map((language) => (
                     <>
                       <MenuItem>
                         <button onClick={(event)=> clickHandler(language.id)}  className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-white/10">
@@ -94,8 +85,6 @@ const Navbar = ({languages, langStudy, setLangStudy}, ...props:any) => {
                       </MenuItem>
                   <div className="my-1 h-px bg-white/5" /></>
                   ))}
-                  
-                  
                 </MenuItems>
               </Transition>
             </Menu>

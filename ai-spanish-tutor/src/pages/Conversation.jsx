@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import ReCAPTCHA from "react-google-recaptcha";
 
-const Conversation = () => {
+const Conversation = ({languages, langStudy}, ...props) => {
     
     const endPoint = import.meta.env.VITE_ENDPOINT
     const siteKey = import.meta.VITE_CAPTCHA_KEY
