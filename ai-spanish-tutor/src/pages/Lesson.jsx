@@ -16,6 +16,7 @@ const Lesson = ({languages, langStudy}, ...props) => {
     const [submitActive, setSubmitActive] = useState(true)
 
     const myTutorURL = "https://ai-tutor-api.fly.dev/my-tutor"
+    const myTutorTestURL = "http://localhost:3000/my-tutor"
 
     const clickHandler = (question) => {
         setMessage(question)
@@ -76,7 +77,7 @@ const Lesson = ({languages, langStudy}, ...props) => {
                     </div>
                     <div className=''>
                         <form className='flex flex-col w-96' onSubmit={submitHandler}>
-                            <textarea placeholder='Ask Maxi anything!'
+                            <textarea placeholder='Ask anything!'
                                 className='w-full h-32 p-2 border-2 rounded-md drop-shadow-md'
                                 name="userInput"
                                 id="userInput"
@@ -103,7 +104,7 @@ const Lesson = ({languages, langStudy}, ...props) => {
 
                         {response && (
                             <div>
-                                <h2 className='text-blue-600 text-xl mb-8'>Maxi says:</h2>
+                                <h2 className='text-blue-600 text-xl mb-8'>{langStudy.tutor} says:</h2>
                                 <p>{response}</p>
                             </div>
                         )}

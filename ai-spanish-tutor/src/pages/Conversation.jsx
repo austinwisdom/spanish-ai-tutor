@@ -12,6 +12,9 @@ const Conversation = ({languages, langStudy}, ...props) => {
     const [_submitActive, setSubmitActive] = useState(true)
     const [ userConversation, setUserConversation] = useState([])
 
+    const conversationURL = "https://ai-tutor-api.fly.dev/conversation"
+    const conversationTestURL = "http://localhost:3000/conversation"
+
     const onChangeCaptcha = (value) => {
         setCaptcha(true)
     }
@@ -34,7 +37,7 @@ const Conversation = ({languages, langStudy}, ...props) => {
         setUserConversation(convoArr)
 
         axios
-            .post(`https://ai-tutor-api.fly.dev/my-tutor`, {
+            .post(`${conversationURL}/${langStudy.id || "es"}`, {
                 message: message
             })
             .then((res) => {
